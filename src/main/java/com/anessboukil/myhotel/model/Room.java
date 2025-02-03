@@ -28,7 +28,7 @@ public class Room {
     @Lob
     private Blob photo;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "room" , fetch = FetchType.LAZY)
     private List<BookedRoom> bookings;
 
     public Room(){
@@ -37,7 +37,6 @@ public class Room {
     public void addBooking(BookedRoom booking){
         if(bookings==null){
             bookings= new ArrayList<>();
-
         }
         bookings.add(booking);
         booking.setRoom(this);
@@ -45,4 +44,29 @@ public class Room {
         String bookingCode = RandomStringUtils.randomNumeric(10);
         booking.setBookingConfirmationCode(bookingCode);
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getRoomType() {
+        return roomType;
+    }
+
+    public BigDecimal getRoomPrice() {
+        return roomPrice;
+    }
+
+    public void setRoomType(String roomType) {
+        this.roomType = roomType;
+    }
+
+    public void setRoomPrice(BigDecimal roomPrice) {
+        this.roomPrice = roomPrice;
+    }
+
+    public void setPhoto(Blob photo) {
+        this.photo = photo;
+    }
 }
+
